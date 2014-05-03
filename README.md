@@ -16,8 +16,6 @@ Features
   - [monit](http://mmonit.com/monit/) like monitoring
 
 
-
-
 The basics
 ----------
 

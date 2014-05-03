@@ -1,0 +1,70 @@
+#!/usr/bin/env node
+
+var _ = require('underscore')
+
+var Table = require('cli-table');
+
+var argv = require('optimist')
+  .options('f', {
+    alias : 'file',
+    default : '/etc/passwd',
+  })
+  .argv
+
+require('../tornfish.js')(argv._.shift(), argv._.shift(), argv, function(err, data) {
+  print(err || data, argv)
+  process.exit(err ? 1 : 0)
+})
+
+
+function print(data, argv) {
+
+  if(data instanceof Error) {
+    if(argv.debug) {
+      console.log(data)
+    } else {
+      console.log(data.message)
+    }
+
+  } else if(_.isArray(data)) {
+    var headers = []
+    var rows = []
+    for(var i = 0 ; i < data.length ; i++) {
+
+
+      for(var attr in data[i]) {
+        if(attr !== '_id' && data[i].hasOwnProperty(attr) && headers.indexOf(attr) === -1) {
+          headers.push(attr)
+        }
+      }
+
+      headers.sort()
+
+      var row = []
+      for(var j = 0 ; j < headers.length ; j++) {
+        var attr = headers[j]
+        if(data[i].hasOwnProperty(attr)) {
+          row.push(data[i][attr])
+        } else {
+          row.push('n/a')
+        }
+
+      }
+      rows.push(row)
+    }
+
+
+
+    var table = new Table({
+      head: headers
+    })
+
+    table.push.apply(table, rows)
+    console.log(table.toString());
+
+  } else {
+    console.log(data)
+  }
+
+}
+
