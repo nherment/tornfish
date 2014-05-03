@@ -1,0 +1,31 @@
+{
+  "name": "tornfish",
+  "version": "0.1.0",
+  "description": "deployment manager for a docker ecosystem",
+  "main": "./tornfish.js",
+  "bin": {
+    "tornfish": "./tornfish.js"
+  },
+  "scripts": {
+    "test": "mocha test --reporter spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/nherment/tornfish.git"
+  },
+  "keywords": [
+    "docker",
+    "node",
+    "monitoring",
+    "deployment"
+  ],
+  "author": "Nicolas Herment <nherment@gmail.com>",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/nherment/tornfish/issues"
+  },
+  "homepage": "https://github.com/nherment/tornfish",
+  "dependencies": {
+    "dockerode": "^1.3.0"
+  }
+}
