@@ -1,4 +1,7 @@
 
+[![Build Status](https://api.travis-ci.org/nherment/tornfish.png?branch=master)](https://travis-ci.org/nherment/tornfish)
+
+
 tornfish
 ========
 
