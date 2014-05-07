@@ -109,6 +109,10 @@ Commands
     tornfish list server|key|config|image
     tornfish list key
 
+    # only display some columns
+    tornfish list server --view name --view host
+
     tornfish status server <name1> <name2> --all
 
-    tornfish deploy <container> <server> [-v <version>]
+    tornfish deploy <server> --image <image> --port <from_1>:<to_1> --port <from_2>:<to_2>
+    tornfish undeploy <server> --container <container>

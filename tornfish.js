@@ -11,6 +11,10 @@ function tornfish(command, type, options, callback) {
     CRUD.exec(command, type, options, callback)
   } else if(Docker.isDockerCommand(command)) {
     Docker.exec(command, type, options, callback)
+  } else {
+    setImmediate(function() {
+      callback(new Error('unsupported command ['+command+']'), undefined)
+    })
   }
 }
 
