@@ -98,13 +98,13 @@ be saved into tornfish's database.
 Commands
 --------
 
-    tornfish add config <name> <value>
+    tornfish add config <name> --value <value>
 
-    tornfish add server <host>[:<ssh_port>] [<name>] [--username <username>|--key <path_to_ssh_key>] [--groups "g1,g2,..."] [--generate-key]
+    tornfish add server <name> [--host <hostname|ip>] [--port <ssh_port>] [--user <username>] [--key <sshKeyName>] [--password <password>]
 
-    tornfish add group <name> [<servers>]
+    tornfish set server <name> --key <key_name>
 
-    tornfish add key <path_to_priv_key> [<name>]
+    tornfish add key [<name>] --path <path_to_priv_key> --no-save
 
     tornfish key <key_name> <servers>|<groups>
 

@@ -26,7 +26,14 @@ function print(data, argv) {
       console.log(data.message)
     }
 
-  } else if(_.isArray(data)) {
+  } else if(_.isString(data)) {
+    console.log(data)
+  } else {
+
+    if(!_.isArray(data)) {
+      data = [data]
+    }
+
     var headers = []
     var rows = []
     for(var i = 0 ; i < data.length ; i++) {
@@ -43,7 +50,7 @@ function print(data, argv) {
       var row = []
       for(var j = 0 ; j < headers.length ; j++) {
         var attr = headers[j]
-        if(data[i].hasOwnProperty(attr)) {
+        if(data[i].hasOwnProperty(attr) && data[i][attr] !== null && data[i][attr] !== undefined) {
           row.push(data[i][attr])
         } else {
           row.push('n/a')
@@ -62,8 +69,6 @@ function print(data, argv) {
     table.push.apply(table, rows)
     console.log(table.toString());
 
-  } else {
-    console.log(data)
   }
 
 }
