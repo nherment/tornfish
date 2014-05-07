@@ -48,17 +48,19 @@ function print(data, argv) {
     var colWidths = []
     var rows = []
     for(var i = 0 ; i < data.length ; i++) {
-
-
       for(var attr in data[i]) {
         if(attr !== '_id' && data[i].hasOwnProperty(attr) && headers.indexOf(attr) === -1) {
-          if(!viewOptions.attrs || (viewOptions.attrs && ~viewOptions.attrs.indexOf(attr))) {
+          if(attr === 'error' || !viewOptions.attrs || (viewOptions.attrs && ~viewOptions.attrs.indexOf(attr))) {
             headers.push(attr)
           }
         }
       }
+    }
 
-      headers.sort()
+    headers.sort()
+
+    for(var i = 0 ; i < data.length ; i++) {
+
 
       var row = []
       for(var j = 0 ; j < headers.length ; j++) {
