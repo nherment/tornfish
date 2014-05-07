@@ -11,8 +11,18 @@ var argv = require('optimist')
   })
   .argv
 
+
+if(_.isString(argv.view)) {
+  argv.view = [argv.view]
+}
+
+var viewOptions = {
+  attrs: argv.view
+}
+delete argv.view
+
 require('../tornfish.js')(argv._.shift(), argv._.shift(), argv, function(err, data) {
-  print(err || data, argv)
+  print(err || data, argv, viewOptions)
   process.exit(err ? 1 : 0)
 })
 
@@ -35,13 +45,16 @@ function print(data, argv) {
     }
 
     var headers = []
+    var colWidths = []
     var rows = []
     for(var i = 0 ; i < data.length ; i++) {
 
 
       for(var attr in data[i]) {
         if(attr !== '_id' && data[i].hasOwnProperty(attr) && headers.indexOf(attr) === -1) {
-          headers.push(attr)
+          if(!viewOptions.attrs || (viewOptions.attrs && ~viewOptions.attrs.indexOf(attr))) {
+            headers.push(attr)
+          }
         }
       }
 
@@ -49,8 +62,15 @@ function print(data, argv) {
 
       var row = []
       for(var j = 0 ; j < headers.length ; j++) {
+
         var attr = headers[j]
+
+        if(colWidths.length < headers.length) {
+          colWidths.push(attr.length+2)
+        }
+
         if(data[i].hasOwnProperty(attr) && data[i][attr] !== null && data[i][attr] !== undefined) {
+          colWidths[j] = Math.max(colWidths[j], (data[i][attr] + '').length+2)
           row.push(data[i][attr])
         } else {
           row.push('n/a')
@@ -63,7 +83,8 @@ function print(data, argv) {
 
 
     var table = new Table({
-      head: headers
+      head: headers,
+      colWidths: colWidths
     })
 
     table.push.apply(table, rows)

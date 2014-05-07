@@ -102,16 +102,13 @@ Commands
 
     tornfish add server <name> [--host <hostname|ip>] [--port <ssh_port>] [--user <username>] [--key <sshKeyName>] [--password <password>]
 
-    tornfish set server <name> --key <key_name>
+    tornfish set server <name> [--key <key_name>] ...
 
     tornfish add key [<name>] --path <path_to_priv_key> --no-save
 
-    tornfish key <key_name> <servers>|<groups>
-
-    tornfish list server
+    tornfish list server|key|config|image
     tornfish list key
 
-    tornfish status
     tornfish status server <name1> <name2> --all
 
     tornfish deploy <container> <server> [-v <version>]
