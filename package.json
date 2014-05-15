@@ -4,7 +4,7 @@
   "description": "deployment manager for a docker ecosystem",
   "main": "./tornfish.js",
   "bin": {
-    "tornfish": "./tornfish.js"
+    "tornfish": "./bin/tornfish"
   },
   "scripts": {
     "test": "mocha test --reporter spec"
